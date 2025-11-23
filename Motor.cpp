@@ -1,6 +1,10 @@
 #include "Motor.h"
 #include <iostream>
 
+// TO-DO Implement Motor Drivers using PiGPIO
+
+Motor::Motor(std::string name)
+    : mSpeed(0), mDirection(FORWARD), mName(name), mID(++nextID) {}
 int Motor::getSpeed() {
     return mSpeed;
 }
@@ -13,18 +17,16 @@ std::string Motor::getName() {
 int Motor::getID() {
     return mID;
 }
+
+// IMPORTANT TO CHANGE TO GPIO
 void Motor::setSpeed(int speed) {
     mSpeed = speed;
 }
+// IMPORTANT TO CHANGE TO GPIO
 void Motor::setDirection(Direction direction) {
     mDirection = direction;
 }
-void Motor::setName(std::string name) {
-    mName = name;
-}
-void Motor::setID(int ID) {
-    mID = ID;
-}
+
 void Motor::stop() {
     setSpeed(0);
     std::cout << "Motor has been stopped";
@@ -33,16 +35,9 @@ void Motor::displayStats(){
     std::cout << "Speed: " << getSpeed() << "\n";
     std::cout << "Direction: " << getDirection() << "\n";
     std::cout << "ID: " << getID() << "\n";
-    std::cout << "Name: " << getName() << "\n";
+    std::cout << "Name: " << getName() << "\n\n";
 }
 
-int main() {
-    Motor motor1;
-    motor1.displayStats();
-    motor1.setSpeed(50);
-    motor1.setDirection(EAST);
-    motor1.setName("Mach-1");
-    motor1.setID(1);
-    motor1.displayStats();
+int Motor::nextID = 0;
 
-}
+

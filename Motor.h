@@ -4,28 +4,27 @@
 #include <string>
 
 
-enum Direction {NORTH, SOUTH, EAST, WEST};
+enum Direction {FORWARD, BACKWARD, LEFT, RIGHT};
+
 class Motor {
-    
+    private:
+        int mSpeed = 0;
+        Direction mDirection = FORWARD;
+        const int mID;
+        static int nextID;
+        const std::string mName = "";
     public:
-        
+        Motor(std::string name = "Unnamed");
         int getSpeed();
         Direction getDirection();
         std::string getName();
         int getID();
         void setSpeed(int speed);
         void setDirection(Direction direction);
-        void setName(std::string name);
-        void setID(int ID);
+        
         void stop();
         void displayStats();
-    private:
-        
-        int mSpeed = 0;
-        Direction mDirection = NORTH;
-        int mID = 0;
-        std::string mName = "";
-    
+        void setup();
     
 };
 #endif
