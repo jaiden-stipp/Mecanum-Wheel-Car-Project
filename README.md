@@ -1,13 +1,12 @@
 # Mecanum Wheel Car Simulator
-
-> A simple text-based simulator for a four-wheeled mecanum-drive car. This repository contains a small C++ simulator that models motor control, turning, and a 2D text-map visualization. It's intended for experimenting with movement logic and simple scripted demos.
+> A simple text-based simulator for a four-wheeled mecanum-drive car. This project was created as a final for TCES 203 by Jaiden Stipp
 
 ## Features
 
-- Simulated `Car` composed of four `Motor` objects
+- Simulated `Car` composed of four `Motor` objects (Motor objects can be implemented to run on Raspberry Pi commands later)
 - Direction-aware movement and turns (FORWARD / BACKWARD / LEFT / RIGHT)
 - Text-based 2D map visualization showing car position and orientation
-- Simple `Camera` capture stub that prints the car's facing direction
+- Simple `Camera` capture that prints the car's facing direction (Can be implemented with real camera Later)
 - Interactive menu and a built-in demo sequence
 
 ## Repository layout
@@ -738,5 +737,8 @@ RIGHT 200 2        # move right at speed 200 for 2 steps
 CAPTURE            # take a camera capture at current position
 STOP               # stop the car
 ```
+
+
+
 
 
