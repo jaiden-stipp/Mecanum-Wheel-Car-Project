@@ -1,6 +1,7 @@
 #ifndef _SIM_
 #define _SIM_
 #include "Car.h"
+#include "Motor.h"
 #include <iostream>
 #include <vector>
 
@@ -15,7 +16,7 @@ class Simulator {
         int mapWidth;
         std::vector<std::vector<int>> map;
         
-        void updatePositionBasedOnDirection(int steps);
+        void updatePositionBasedOnDirection(Direction moveDir, int steps);
 
     public:
         Simulator(int width, int height, Car* car);

@@ -13,41 +13,50 @@ void Simulator::updateCarPosition(int newX, int newY, int newDirection) {
     direction = newDirection;
 }
 
-void Simulator::updatePositionBasedOnDirection(int steps) {
+static int dirToIndex(Direction d) {
+    switch (d) {
+        case FORWARD: return 0;
+        case RIGHT: return 1;
+        case BACKWARD: return 2;
+        case LEFT: return 3;
+        default: return 0;
+    }
+}
+
+void Simulator::updatePositionBasedOnDirection(Direction moveDir, int steps) {
     for (int i = 0; i < steps; i++) {
-        Direction dir = car->getCarDirection();
-        if (dir == FORWARD) {
+        Direction facing = car->getCarDirection();
+        int facingIdx = dirToIndex(facing);
+        int moveIdx = dirToIndex(moveDir);
+        int absoluteIdx = (facingIdx + moveIdx) % 4;
+
+        // absoluteIdx: 0 = forward (up), 1 = right, 2 = backward (down), 3 = left
+        if (absoluteIdx == 0) {
             if (y > 0) y--;
-        } else if (dir == BACKWARD) {
-            if (y < mapHeight - 1) y++;
-        } else if (dir == LEFT) {
-            if (x > 0) x--;
-        } else if (dir == RIGHT) {
+        } else if (absoluteIdx == 1) {
             if (x < mapWidth - 1) x++;
+        } else if (absoluteIdx == 2) {
+            if (y < mapHeight - 1) y++;
+        } else if (absoluteIdx == 3) {
+            if (x > 0) x--;
         }
     }
 }
 
 void Simulator::moveForward(int steps) {
-    updatePositionBasedOnDirection(steps);
+    updatePositionBasedOnDirection(FORWARD, steps);
 }
 
 void Simulator::moveBackward(int steps) {
-    for (int i = 0; i < steps; i++) {
-        if (y < mapHeight - 1) y++;
-    }
+    updatePositionBasedOnDirection(BACKWARD, steps);
 }
 
 void Simulator::moveLeft(int steps) {
-    for (int i = 0; i < steps; i++) {
-        if (x > 0) x--;
-    }
+    updatePositionBasedOnDirection(LEFT, steps);
 }
 
 void Simulator::moveRight(int steps) {
-    for (int i = 0; i < steps; i++) {
-        if (x < mapWidth - 1) x++;
-    }
+    updatePositionBasedOnDirection(RIGHT, steps);
 }
 
 void Simulator::displayMap() {

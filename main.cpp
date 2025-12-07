@@ -136,7 +136,7 @@ int main() {
     
     std::cout << "Car and simulator initialized successfully!\n";
     std::cout << "The car starts at position (" << 5 << ", " << 5 << ") facing " << directionToString(car.getCarDirection()) << "\n";
-    
+    sim.displayMap();
     int choice;
     bool running = true;
     
